@@ -8,7 +8,12 @@
     "rootDir": "src",
     "outDir": "dist",
     "strict": true,
-    "importHelpers": true
+    "importHelpers": true,
+    "experimentalDecorators": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "global.d.ts"
+    ]
   },
-  "exclude": ["node_modules", "dist", "__tests__"]
+  "exclude": ["node_modules", "dist", "__tests__"],
 }

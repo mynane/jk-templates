@@ -1,17 +1,24 @@
 {
-  "name": "ts-npm-template",
-  "version": "1.0.0",
-  "repository": "https://github.com/alii/ts-npm-template",
-  "author": "Alistair Smith <alistairsmith01@gmail.com>",
+  "name": "jk-templates",
+  "version": "0.0.1",
+  "repository": "https://github.com/mynane/jk-templates",
+  "author": "mynane <jikequan@163.com>",
   "license": "MIT",
+  "main": "index.js",
+  "homepage": "https://github.com/mynane/jk-templates/blob/master/README.md",
+  "bin": {
+    "jkt": "./index.js"
+  },
   "scripts": {
     "test": "eslint . --fix&&jest",
     "prepublishOnly": "npm run test&&npm run build",
-    "build": "tsc"
+    "build": "tsc",
+    "watch": "tsc -w"
   },
-  "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "devDependencies": {
+    "@types/cors": "^2.8.10",
+    "@types/express": "^4.17.11",
     "@typescript-eslint/eslint-plugin": "^4.12.0",
     "@typescript-eslint/parser": "^4.12.0",
     "eslint": "^7.17.0",
@@ -23,12 +30,23 @@
   "files": [
     "package.json",
     "readme.md",
-    "dist"
+    "dist",
+    "index.js"
   ],
   "prettier": {
     "printWidth": 120
   },
   "dependencies": {
-    "tslib": "^2.1.0"
+    "axios": "^0.21.1",
+    "chalk": "^4.1.1",
+    "commander": "^7.2.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "fs-extra": "^9.1.0",
+    "inquirer": "^8.0.0",
+    "inquirer-confirm": "^2.0.7",
+    "open": "7.0.0",
+    "tslib": "^2.1.0",
+    "uuid": "^8.3.2"
   }
 }

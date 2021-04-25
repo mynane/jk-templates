@@ -10,6 +10,11 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["@typescript-eslint"],
-  rules: { "@typescript-eslint/explicit-module-boundary-types": "off" },
+  rules: {
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/no-var-requires": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-empty": "off",
+  },
   ignorePatterns: ["dist"],
 };
