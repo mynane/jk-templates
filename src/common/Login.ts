@@ -6,6 +6,7 @@ import cors from "cors";
 import express from "express";
 import open from "open";
 import Constant from "../config/constant";
+import { JKUtil } from "../libs/Application";
 import { IContext } from "../types/base.type";
 
 const loginUrl = () => {
@@ -15,9 +16,7 @@ const loginUrl = () => {
   return url;
 };
 
-class Login {
-  ctx: IContext | undefined;
-
+class Login extends JKUtil {
   public async confirm() {
     try {
       await this.ctx?.Form?.confirm("Are you sure you want to login again?");

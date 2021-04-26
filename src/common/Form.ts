@@ -1,6 +1,7 @@
 import chalk from "chalk";
 import inquirer from "inquirer";
 import inquirerConfirm from "inquirer-confirm";
+import { JKUtil } from "../libs/Application";
 
 export interface IInput {
   defaultValue?: string;
@@ -9,7 +10,7 @@ export interface IInput {
   check?: (val: string) => Promise<any>;
 }
 
-class Form {
+class Form extends JKUtil {
   public confirm(title = "yes|no") {
     return new Promise((resolve, reject) => {
       inquirerConfirm(title).then(

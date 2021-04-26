@@ -1,5 +1,5 @@
 /* eslint-disable prefer-const */
-import { Command } from "../libs/Application";
+import { Command, JKModule } from "../libs/Application";
 import { IContext } from "../types/base.type";
 
 @Command({
@@ -7,8 +7,7 @@ import { IContext } from "../types/base.type";
   description: "modules lists",
   alias: "l",
 })
-export class Lists {
-  ctx: IContext | undefined;
+export class Lists extends JKModule {
   /**
    * action
    */
@@ -29,9 +28,7 @@ export class Lists {
     ["-l, --lists", "show modlues lists"],
   ],
 })
-export class Module {
-  ctx: IContext | undefined;
-
+export class Module extends JKModule {
   public action = async (type: any) => {
     const { name, lists } = type;
     if (name || !Object.keys(type).length) {

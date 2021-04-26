@@ -1,6 +1,6 @@
 /* eslint-disable prefer-const */
 // import { Command } from "../utils/Bootstrap";
-import { Command, Global } from "../libs/Application";
+import { Command, Global, JKModule } from "../libs/Application";
 import Login from "../common/Login";
 import { IContext } from "../types/base.type";
 
@@ -11,9 +11,7 @@ import { IContext } from "../types/base.type";
   command: "login",
   description: "login account and synchronize data",
 })
-export class LoginCommand {
-  ctx: IContext | undefined;
-
+export class LoginCommand extends JKModule {
   public action = async () => {
     this.ctx?.Login?.action();
   };
@@ -26,9 +24,7 @@ export class LoginCommand {
   command: "logout",
   description: "logout account",
 })
-export class LogoutCommand {
-  ctx: IContext | undefined;
-
+export class LogoutCommand extends JKModule {
   public action = async () => {
     this.ctx?.Login?.logout();
   };

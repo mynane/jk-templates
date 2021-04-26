@@ -1,9 +1,11 @@
 import fs from "fs-extra";
 import Constant from "../config/constant";
+import { JKUtil } from "../libs/Application";
 
-class Token {
+class Token extends JKUtil {
   public token: string | undefined;
   constructor() {
+    super();
     this.load();
   }
 

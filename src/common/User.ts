@@ -1,11 +1,13 @@
 import chalk from "chalk";
 import fs from "fs-extra";
 import Constant from "../config/constant";
+import { JKUtil } from "../libs/Application";
 import Inject from "../utils/Inject";
 
-class User {
+class User extends JKUtil {
   public _user = "{}";
   constructor() {
+    super();
     this.load();
   }
 

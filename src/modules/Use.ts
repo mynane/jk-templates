@@ -1,7 +1,7 @@
 /* eslint-disable prefer-const */
 import chalk from "chalk";
 import Api from "../common/Api";
-import { Command, Global } from "../libs/Application";
+import { Command, Global, JKModule } from "../libs/Application";
 import { IContext } from "../types/base.type";
 
 /**
@@ -13,9 +13,7 @@ import { IContext } from "../types/base.type";
   description: "",
   alias: "",
 })
-class Use {
-  ctx: IContext | undefined;
-
+class Use extends JKModule {
   public action = async (type: any, name: any) => {
     const [id] = name?.args;
     if (!id) {

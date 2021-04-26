@@ -1,5 +1,6 @@
 import chalk from "chalk";
 import { program } from "commander";
+import { IContext } from "../types/base.type";
 import Exector from "./Exector";
 
 export interface ICommand {
@@ -96,6 +97,14 @@ class Application extends Exector {
     this.loadModules();
     this.initCommands();
   }
+}
+
+export class JKModule {
+  ctx: IContext | undefined;
+}
+
+export class JKUtil {
+  ctx: IContext | undefined;
 }
 
 const app = new Application() as IApplication;

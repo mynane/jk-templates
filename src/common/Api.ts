@@ -1,12 +1,10 @@
 import axios, { AxiosResponse } from "axios";
 import chalk from "chalk";
 import Constant from "../config/constant";
-import { Inject } from "../libs/Application";
+import { Inject, JKUtil } from "../libs/Application";
 import { IContext } from "../types/base.type";
 
-class Api {
-  ctx: IContext | undefined;
-
+class Api extends JKUtil {
   get token() {
     this.ctx?.Token?.load();
     return this.ctx?.Token?.token || "";

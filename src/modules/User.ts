@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { Command, Global } from "../libs/Application";
+import { Command, Global, JKModule } from "../libs/Application";
 import Login from "../common/Login";
 import Api from "../common/Api";
 import { IContext } from "../types/base.type";
@@ -14,9 +14,7 @@ import { IContext } from "../types/base.type";
   alias: "w",
   // providers: [Api],
 })
-class User {
-  ctx: IContext | undefined;
-
+class User extends JKModule {
   public action = async () => {
     try {
       const user = await this.ctx?.Api?.user();
