@@ -16,13 +16,13 @@ class Api {
     return this.Token?.token || "";
   }
 
-  public async handle(res: AxiosResponse<any>, url: string, headers = {}) {
+  public async handle(res: AxiosResponse<any>, url: string, headers = {}, method: string, postData = {}) {
     const { code, data, message = "" } = res?.data ?? {};
     if (code === 0) {
       return data;
     } else if (code === 401) {
       await this.Auth?.confirm();
-      return await this.get(url, headers);
+      return await (this as any)[method](url, headers, postData);
     } else {
       throw new Error(chalk.red(message));
     }
@@ -34,21 +34,21 @@ class Api {
       method: "get",
       headers: { ...headers, "Content-Type": "application/json", Authorization: `Bearer ${this.token}` },
     }).then(async (res: AxiosResponse<any>) => {
-      return this.handle(res, url, headers);
+      return this.handle(res, url, headers, "get");
     });
   }
 
   /**
    * post
    */
-  public post(url: string, data = {}, headers = {}) {
+  public post(url: string, headers = {}, data = {}) {
     return axios({
       method: "post",
       data,
       url: `${Constant?.PREFIX}${url}`,
       headers: { ...headers, "Content-Type": "application/json", Authorization: `Bearer ${this.token}` },
     }).then(async (res: AxiosResponse<any>) => {
-      return this.handle(res, url, headers);
+      return this.handle(res, url, headers, "post", data);
     });
   }
 

@@ -6,6 +6,6 @@ process.title = "jkt";
 
 program.version(require("../package").version).usage("<command> [options]");
 
-require("./modules");
+require("./libs/Bootstrap");
 
 program.parse(process.argv);

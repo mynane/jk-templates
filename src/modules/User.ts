@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import Api from "../common/API";
-import { Command } from "../utils/Bootstrap";
+import { Command, Global } from "../libs/Application";
 import Login from "../common/Login";
 
 /**
@@ -11,22 +11,26 @@ import Login from "../common/Login";
   command: "whoami",
   description: "who am i?",
   alias: "w",
-  providers: [Api, Login],
+  // providers: [Api],
 })
 class User {
-  private readonly Api?: Api;
-  private readonly Login?: Login;
+  @Global("Api")
+  public api?: Api;
+  @Global("Login")
+  public login?: Login;
 
   public action = async () => {
     try {
-      const user = await this.Api?.user();
+      const user = await this.api?.user();
       if (!user) {
         throw new Error("user can not found");
       }
       console.log(chalk.green(`current login user is: ${chalk.blue(user.login)}`));
     } catch (error) {
       console.log(chalk.red("user can not found!"));
-      this.Login?.confirm();
+      console.log(12312);
+      console.log(this.login);
+      this.login?.confirm();
     }
   };
 }

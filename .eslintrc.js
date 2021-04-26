@@ -15,6 +15,7 @@ module.exports = {
     "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "no-empty": "off",
+    "no-empty-function": "off",
   },
   ignorePatterns: ["dist"],
 };

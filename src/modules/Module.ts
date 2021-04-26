@@ -1,16 +1,13 @@
 /* eslint-disable prefer-const */
 import chalk from "chalk";
-import Inject from "../utils/Inject";
 import Api from "../common/API";
 import Form from "../common/Form";
 import { checkUrl } from "../utils";
-import { Command } from "../utils/Bootstrap";
+import { Command, Global } from "../libs/Application";
 
 /**
  * 个人认证
  */
-@Inject(Api)
-@Inject(Form)
 @Command({
   command: "group",
   description: "manage your groups",
@@ -21,8 +18,10 @@ import { Command } from "../utils/Bootstrap";
   ],
 })
 class Module {
-  public Api: Api | undefined;
-  public Form: Form | undefined;
+  @Global("Api")
+  public api?: Api;
+  @Global("Form")
+  public form?: Form;
 
   public action = async (type: any) => {
     const { name, lists } = type;
@@ -38,10 +37,10 @@ class Module {
    */
   public async createModule(name?: string) {
     try {
-      const moduleName = name ?? (await this.Form?.input({ message: "please input module`s name:" }));
-      const url = await this.Form?.input({ message: "please input module`s url:", check: checkUrl });
-      const describe = await this.Form?.input({ message: "please input module`s describe:" });
-      await this.Api?.saveGroup({ name: moduleName, describe, url });
+      const moduleName = name ?? (await this.form?.input({ message: "please input module`s name:" }));
+      const url = await this.form?.input({ message: "please input module`s url:", check: checkUrl });
+      const describe = await this.form?.input({ message: "please input module`s describe:" });
+      await this.api?.saveGroup({ name: moduleName, describe, url });
       console.log(chalk.green(`create module ${moduleName} success`));
     } catch (error) {
       console.log(error);
@@ -53,11 +52,11 @@ class Module {
    */
   public async showLists() {
     try {
-      const { data } = await this.Api?.groupLists();
+      const { data } = await this.api?.groupLists();
       if (!data.length) {
         try {
           console.log(chalk.green("No data found"));
-          await this.Form?.confirm("do you need to create a new one");
+          await this.form?.confirm("do you need to create a new one");
           this.createModule();
         } catch (error) {}
 

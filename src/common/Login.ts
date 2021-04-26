@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable no-async-promise-executor */
 /* eslint-disable prefer-const */
 import chalk from "chalk";
@@ -30,7 +31,7 @@ class Login {
 
   public async confirm() {
     try {
-      await this.Form?.confirm("Are you sure you want to log in again?");
+      await this.Form?.confirm("Are you sure you want to login again?");
       await this.action();
     } catch (error) {}
   }

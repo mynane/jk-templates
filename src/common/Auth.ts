@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable no-async-promise-executor */
 /* eslint-disable prefer-const */
 import chalk from "chalk";
@@ -6,10 +7,8 @@ import express from "express";
 import open from "open";
 import Constant from "../config/constant";
 import Inject from "../utils/Inject";
-import Api from "./Api";
 import Form from "./Form";
 import Token from "./Token";
-import User from "./User";
 
 const loginUrl = () => {
   const CLIENT_ID = "Iv1.f92a3890970ecc1e";
@@ -21,14 +20,12 @@ const loginUrl = () => {
 @Inject(Form)
 @Inject(Token)
 class Auth {
-  private readonly User?: User;
-  private readonly Api?: Api;
   private readonly Token?: Token;
   private readonly Form?: Form;
 
   public async confirm() {
     try {
-      await this.Form?.confirm("Are you sure you want to log in again?");
+      await this.Form?.confirm("Are you sure you want to login again?");
       await this.action();
     } catch (error) {}
   }

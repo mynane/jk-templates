@@ -2,7 +2,6 @@ import fs from "fs-extra";
 import Constant from "../config/constant";
 
 class Token {
-  public Constant: Constant | undefined;
   public token: string | undefined;
   constructor() {
     this.load();
