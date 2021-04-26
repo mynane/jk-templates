@@ -2,6 +2,8 @@
 // import { Command } from "../utils/Bootstrap";
 import { Command, Global } from "../libs/Application";
 import Login from "../common/Login";
+import { IContext } from "../types/base.type";
+
 /**
  * login
  */
@@ -10,11 +12,10 @@ import Login from "../common/Login";
   description: "login account and synchronize data",
 })
 export class LoginCommand {
-  @Global("Login")
-  public login?: Login;
+  ctx: IContext | undefined;
 
   public action = async () => {
-    this.login?.action();
+    this.ctx?.Login?.action();
   };
 }
 
@@ -26,10 +27,9 @@ export class LoginCommand {
   description: "logout account",
 })
 export class LogoutCommand {
-  @Global("Login")
-  public login?: Login;
+  ctx: IContext | undefined;
 
   public action = async () => {
-    this.login?.logout();
+    this.ctx?.Login?.logout();
   };
 }

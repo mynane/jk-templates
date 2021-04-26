@@ -2,6 +2,7 @@ import chalk from "chalk";
 import { Command, Global } from "../libs/Application";
 import Login from "../common/Login";
 import Api from "../common/Api";
+import { IContext } from "../types/base.type";
 
 /**
  * 个人认证
@@ -14,14 +15,11 @@ import Api from "../common/Api";
   // providers: [Api],
 })
 class User {
-  @Global("Api")
-  public api?: Api;
-  @Global("Login")
-  public login?: Login;
+  ctx: IContext | undefined;
 
   public action = async () => {
     try {
-      const user = await this.api?.user();
+      const user = await this.ctx?.Api?.user();
       if (!user) {
         throw new Error("user can not found");
       }
@@ -29,8 +27,7 @@ class User {
     } catch (error) {
       console.log(chalk.red("user can not found!"));
       console.log(12312);
-      console.log(this.login);
-      this.login?.confirm();
+      this.ctx?.Login?.confirm();
     }
   };
 }

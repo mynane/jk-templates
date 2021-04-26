@@ -6,6 +6,7 @@ import cors from "cors";
 import express from "express";
 import open from "open";
 import Constant from "../config/constant";
+import { IContext } from "../types/base.type";
 import Inject from "../utils/Inject";
 import Form from "./Form";
 import Token from "./Token";
@@ -17,15 +18,12 @@ const loginUrl = () => {
   return url;
 };
 
-@Inject(Form)
-@Inject(Token)
 class Auth {
-  private readonly Token?: Token;
-  private readonly Form?: Form;
+  ctx: IContext | undefined;
 
   public async confirm() {
     try {
-      await this.Form?.confirm("Are you sure you want to login again?");
+      await this.ctx?.Form?.confirm("Are you sure you want to login again?");
       await this.action();
     } catch (error) {}
   }
@@ -41,7 +39,7 @@ class Auth {
         })
       );
       app.get("/oauth", async (req: any, res: any) => {
-        await this.Token?.save(req.query?.token);
+        await this.ctx?.Token?.save(req.query?.token);
         try {
           res.end(JSON.stringify({ code: 0, data: "success" }));
           resolve({ code: 0, data: "success" });

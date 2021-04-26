@@ -6,11 +6,7 @@ import cors from "cors";
 import express from "express";
 import open from "open";
 import Constant from "../config/constant";
-import { Inject } from "../libs/Application";
-import Api from "./Api";
-import Form from "./Form";
-import Token from "./Token";
-import User from "./User";
+import { IContext } from "../types/base.type";
 
 const loginUrl = () => {
   const CLIENT_ID = "Iv1.f92a3890970ecc1e";
@@ -19,22 +15,18 @@ const loginUrl = () => {
   return url;
 };
 
-@Inject([Form, Token, Api, User])
 class Login {
-  Form!: () => Form;
-  Token!: () => Token;
-  Api!: () => Api;
-  User!: () => User;
+  ctx: IContext | undefined;
 
   public async confirm() {
     try {
-      await this.Form()?.confirm("Are you sure you want to login again?");
+      await this.ctx?.Form?.confirm("Are you sure you want to login again?");
       await this.action();
     } catch (error) {}
   }
 
   public async logout() {
-    await this.Token()?.save("");
+    await this.ctx?.Token?.save("");
     console.log(chalk.green("logout success"));
   }
 
@@ -50,13 +42,13 @@ class Login {
         })
       );
       app.get("/oauth", async (req: any, res: any) => {
-        await this.Token()?.save(req.query?.token);
+        await this.ctx?.Token?.save(req.query?.token);
         try {
-          const user = await this.Api()?.user();
+          const user = await this.ctx?.Api?.user();
           if (!user) {
             throw new Error("user not found");
           }
-          await this.User()?.save(JSON.stringify(user));
+          await this.ctx?.User?.save(JSON.stringify(user));
           console.log(chalk.green(`login success: ${chalk.blue(user?.login)}`));
           res.end(JSON.stringify({ code: 0, data: "success" }));
           resolve({ code: 0, data: "success" });

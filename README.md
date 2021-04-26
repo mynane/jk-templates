@@ -1,2 +1,7 @@
-# ts-npm-template
-Quickstart a node module with TypeScript
+# jk-tempate
+
+#### 收集摸版
+
+```
+jkt -h
+```

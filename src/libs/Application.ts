@@ -32,6 +32,7 @@ class Application extends Exector {
   public commands: Map<string, any> = new Map();
   public $providers: any[] = [];
   public globalProviders: Map<string, any> = new Map();
+  public mudules: any = {};
 
   /**
    * 命令注册
@@ -62,8 +63,6 @@ class Application extends Exector {
           return this.globalProviders.get(i.name);
         };
       }
-
-      // Object.assign(target.prototype, hijack(target.prototype, this)); // hijack(target, this);
     };
   };
 

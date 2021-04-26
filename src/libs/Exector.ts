@@ -37,6 +37,7 @@ class Exector {
   $providers: any;
   globalProviders: any;
   prototype: any;
+  mudules: any;
 
   public loadModules() {
     const _path = path.resolve(__dirname, "../modules");
@@ -50,9 +51,7 @@ class Exector {
 
   public initCommands() {
     for (const c of this.commands) {
-      for (const i of c[1].$providers) {
-        c[1].prototype[i.name] = new i();
-      }
+      (c[1] as any).prototype["ctx"] = this.mudules;
       const instance = new c[1]();
       rejesterProgram(instance, c[0]);
     }
@@ -60,7 +59,11 @@ class Exector {
 
   public initGlobal() {
     for (const c of this.$providers) {
-      this.globalProviders.set(c.name, new c());
+      (c as any).prototype["ctx"] = this.mudules;
+      const instance = new c();
+      instance.ctx = this.mudules;
+      this.globalProviders.set(c.name, instance);
+      this.mudules[c.name] = instance;
     }
   }
 }
