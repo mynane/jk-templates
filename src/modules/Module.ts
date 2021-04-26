@@ -1,9 +1,9 @@
 /* eslint-disable prefer-const */
 import chalk from "chalk";
-import Api from "../common/API";
 import Form from "../common/Form";
 import { checkUrl } from "../utils";
 import { Command, Global } from "../libs/Application";
+import Api from "../common/Api";
 
 /**
  * 个人认证

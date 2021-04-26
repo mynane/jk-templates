@@ -1,7 +1,6 @@
 /* eslint-disable prefer-const */
 import chalk from "chalk";
-import Api from "../common/API";
-import User from "../common/User";
+import Api from "../common/Api";
 import { Command, Global } from "../libs/Application";
 
 /**

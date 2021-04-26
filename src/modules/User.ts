@@ -1,7 +1,7 @@
 import chalk from "chalk";
-import Api from "../common/API";
 import { Command, Global } from "../libs/Application";
 import Login from "../common/Login";
+import Api from "../common/Api";
 
 /**
  * 个人认证
