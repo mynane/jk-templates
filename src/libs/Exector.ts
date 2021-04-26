@@ -36,6 +36,7 @@ class Exector {
   commands: any;
   $providers: any;
   globalProviders: any;
+  prototype: any;
 
   public loadModules() {
     const _path = path.resolve(__dirname, "../modules");

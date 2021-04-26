@@ -3,7 +3,7 @@ import fs from "fs-extra";
 import Constant from "../config/constant";
 import Inject from "../utils/Inject";
 
-class Token {
+class User {
   public _user = "{}";
   constructor() {
     this.load();
@@ -41,4 +41,4 @@ class Token {
   }
 }
 
-export default Token;
+export default User;

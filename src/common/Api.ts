@@ -1,19 +1,16 @@
 import axios, { AxiosResponse } from "axios";
 import chalk from "chalk";
 import Constant from "../config/constant";
-import Inject from "../utils/Inject";
+import { Inject } from "../libs/Application";
 import Auth from "./Auth";
 import Token from "./Token";
 
-@Inject(Token)
-@Inject(Auth)
+@Inject([Token, Auth])
 class Api {
-  private readonly Token?: Token;
-  private readonly Auth?: Auth;
-
+  [x: string]: any;
   get token() {
-    this.Token?.load();
-    return this.Token?.token || "";
+    this.Token()?.load();
+    return this.Token()?.token || "";
   }
 
   public async handle(res: AxiosResponse<any>, url: string, headers = {}, method: string, postData = {}) {
@@ -21,7 +18,7 @@ class Api {
     if (code === 0) {
       return data;
     } else if (code === 401) {
-      await this.Auth?.confirm();
+      await this.Auth()?.confirm();
       return await (this as any)[method](url, headers, postData);
     } else {
       throw new Error(chalk.red(message));

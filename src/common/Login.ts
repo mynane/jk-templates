@@ -6,7 +6,7 @@ import cors from "cors";
 import express from "express";
 import open from "open";
 import Constant from "../config/constant";
-import Inject from "../utils/Inject";
+import { Inject } from "../libs/Application";
 import Api from "./Api";
 import Form from "./Form";
 import Token from "./Token";
@@ -19,15 +19,9 @@ const loginUrl = () => {
   return url;
 };
 
-@Inject(Token)
-@Inject(User)
-@Inject(Form)
-@Inject(Api)
+@Inject([Form, Token, Api, User])
 class Login {
-  private readonly User?: User;
-  private readonly Api?: Api;
-  private readonly Token?: Token;
-  private readonly Form?: Form;
+  [x: string]: any;
 
   public async confirm() {
     try {
@@ -37,7 +31,7 @@ class Login {
   }
 
   public async logout() {
-    await this.Token?.save("");
+    await this.Token()?.save("");
     console.log(chalk.green("logout success"));
   }
 
@@ -45,6 +39,7 @@ class Login {
     return new Promise(async (resolve, reject) => {
       let server: any;
       const app = express();
+
       app.use(
         cors({
           origin: "https://www.jikequan.net",
@@ -52,13 +47,13 @@ class Login {
         })
       );
       app.get("/oauth", async (req: any, res: any) => {
-        await this.Token?.save(req.query?.token);
+        await this.Token()?.save(req.query?.token);
         try {
-          const user = await this.Api?.user();
+          const user = await this.Api()?.user();
           if (!user) {
             throw new Error("user not found");
           }
-          await this.User?.save(JSON.stringify(user));
+          await this.User()?.save(JSON.stringify(user));
           console.log(chalk.green(`login success: ${chalk.blue(user?.login)}`));
           res.end(JSON.stringify({ code: 0, data: "success" }));
           resolve({ code: 0, data: "success" });

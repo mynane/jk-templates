@@ -16,7 +16,7 @@ export interface IApplication {
   commands: Map<string, any>;
   globalProviders: Map<string, any>;
   Command: <T extends ICommand, U>(options: T) => (target: { new (): U; [key: string]: any }) => any;
-  Inject: <T, U>(module: { new (): T }) => (target: { new (): U }) => any;
+  Inject: <T>(modules: any[]) => any;
   Global: <T extends string>(module: T) => any;
   providers: (provider: FuntionType | FuntionType[]) => any;
   start: () => any;
@@ -55,10 +55,15 @@ class Application extends Exector {
    * @param module
    * @returns
    */
-  public Inject = <T, U>(module: { new (): T }) => {
+  public Inject = <T, U>(modules: { new (): T }[]) => {
     return (target: { new (): U }) => {
-      const instance = new module();
-      target.prototype[module.name] = instance;
+      for (const i of modules) {
+        target.prototype[i.name] = () => {
+          return this.globalProviders.get(i.name);
+        };
+      }
+
+      // Object.assign(target.prototype, hijack(target.prototype, this)); // hijack(target, this);
     };
   };
 
