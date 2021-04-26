@@ -1,8 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import chalk from "chalk";
 import Constant from "../config/constant";
-import { Inject, JKUtil } from "../libs/Application";
-import { IContext } from "../types/base.type";
+import { JKUtil } from "../libs/Application";
 
 class Api extends JKUtil {
   get token() {

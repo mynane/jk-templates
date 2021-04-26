@@ -1,6 +1,5 @@
 import chalk from "chalk";
 import { JKUtil } from "../libs/Application";
-import { IContext } from "../types/base.type";
 import { checkUrl } from "../utils";
 
 class Module extends JKUtil {

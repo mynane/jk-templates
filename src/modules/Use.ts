@@ -1,8 +1,6 @@
 /* eslint-disable prefer-const */
 import chalk from "chalk";
-import Api from "../common/Api";
-import { Command, Global, JKModule } from "../libs/Application";
-import { IContext } from "../types/base.type";
+import { Command, JKModule } from "../libs/Application";
 
 /**
  * 个人认证

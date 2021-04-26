@@ -1,5 +1,3 @@
-import chalk from "chalk";
-import { program } from "commander";
 import { IContext } from "../types/base.type";
 import Exector from "./Exector";
 
@@ -17,7 +15,7 @@ export interface IApplication {
   commands: Map<string, any>;
   globalProviders: Map<string, any>;
   Command: <T extends ICommand, U>(options: T) => (target: { new (): U; [key: string]: any }) => any;
-  Inject: <T>(modules: any[]) => any;
+  Inject: (modules: any[]) => any;
   Global: <T extends string>(module: T) => any;
   providers: (provider: FuntionType | FuntionType[]) => any;
   start: () => any;

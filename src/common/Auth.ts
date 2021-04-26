@@ -7,10 +7,6 @@ import express from "express";
 import open from "open";
 import Constant from "../config/constant";
 import { JKUtil } from "../libs/Application";
-import { IContext } from "../types/base.type";
-import Inject from "../utils/Inject";
-import Form from "./Form";
-import Token from "./Token";
 
 const loginUrl = () => {
   const CLIENT_ID = "Iv1.f92a3890970ecc1e";

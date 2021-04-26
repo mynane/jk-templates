@@ -1,8 +1,6 @@
 /* eslint-disable prefer-const */
 // import { Command } from "../utils/Bootstrap";
-import { Command, Global, JKModule } from "../libs/Application";
-import Login from "../common/Login";
-import { IContext } from "../types/base.type";
+import { Command, JKModule } from "../libs/Application";
 
 /**
  * login

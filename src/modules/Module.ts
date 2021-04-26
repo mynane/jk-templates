@@ -1,6 +1,5 @@
 /* eslint-disable prefer-const */
 import { Command, JKModule } from "../libs/Application";
-import { IContext } from "../types/base.type";
 
 @Command({
   command: "lists",

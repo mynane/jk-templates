@@ -1,8 +1,5 @@
 import chalk from "chalk";
-import { Command, Global, JKModule } from "../libs/Application";
-import Login from "../common/Login";
-import Api from "../common/Api";
-import { IContext } from "../types/base.type";
+import { Command, JKModule } from "../libs/Application";
 
 /**
  * 个人认证
