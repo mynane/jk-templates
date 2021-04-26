@@ -20,7 +20,6 @@ class Token {
    * save
    */
   public save(doc = "") {
-    console.log(doc);
     return new Promise((resolve) => {
       fs.writeFileSync(Constant?.JK_TOKEN, doc);
       this.token = doc;

@@ -21,11 +21,14 @@ const loginUrl = () => {
 
 @Inject([Form, Token, Api, User])
 class Login {
-  [x: string]: any;
+  Form!: () => Form;
+  Token!: () => Token;
+  Api!: () => Api;
+  User!: () => User;
 
   public async confirm() {
     try {
-      await this.Form?.confirm("Are you sure you want to login again?");
+      await this.Form()?.confirm("Are you sure you want to login again?");
       await this.action();
     } catch (error) {}
   }

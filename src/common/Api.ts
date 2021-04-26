@@ -7,7 +7,9 @@ import Token from "./Token";
 
 @Inject([Token, Auth])
 class Api {
-  [x: string]: any;
+  Token!: () => Token;
+  Auth!: () => Auth;
+
   get token() {
     this.Token()?.load();
     return this.Token()?.token || "";
