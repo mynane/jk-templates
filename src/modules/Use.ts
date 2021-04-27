@@ -27,7 +27,6 @@ class Use extends JKModule {
       this.ctx?.Loading?.text("installing \n");
       await this.ctx?.Module?.install(moduleName);
       this.ctx?.Loading?.spinner?.succeed("success");
-      await this.ctx?.Version?.check();
     } catch (error) {
       this.ctx?.Loading?.spinner?.fail("module loading or install fail!");
       console.log(chalk.red(error));

@@ -12,7 +12,6 @@ export class Lists extends JKModule {
    */
   public action = async () => {
     await this.ctx?.Module?.lists();
-    await this.ctx?.Version?.check();
   };
 }
 
@@ -36,8 +35,6 @@ export class Module extends JKModule {
     } else if (lists) {
       this.ctx?.Module?.lists();
     }
-
-    await this.ctx?.Version?.check();
   };
 
   /**

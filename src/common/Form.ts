@@ -15,10 +15,10 @@ class Form extends JKUtil {
     return new Promise((resolve, reject) => {
       inquirerConfirm(title).then(
         function confirmed() {
-          resolve(true);
+          resolve("yes");
         },
         function cancelled() {
-          reject(false);
+          reject("no");
         }
       );
     });

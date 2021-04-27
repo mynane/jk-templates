@@ -1,43 +1,52 @@
-import chalk from "chalk";
 import fs from "fs-extra";
 import Constant from "../config/constant";
-import Inject from "../utils/Inject";
+import { JKUtil } from "../libs/Application";
 
-class Config {
+class Config extends JKUtil {
   public _config = "{}";
   constructor() {
+    super();
     this.load();
   }
 
   get config() {
-    return JSON.parse(this._config);
+    return JSON.parse(this._config || "{}");
   }
 
   public load() {
     try {
-      this._config = fs.readFileSync(Constant?.JK_USER).toString();
+      this._config = fs.readFileSync(Constant?.JK_CONFIG).toString();
     } catch (error) {
       fs.ensureDirSync(Constant?.JK_ROOT);
-      fs.writeFileSync(Constant?.JK_USER, "");
+      fs.writeFileSync(Constant?.JK_CONFIG, "");
     }
   }
 
   /**
    * save
    */
-  public save(doc = "{}") {
+  public save(key: string, value: any) {
     return new Promise((resolve) => {
-      fs.writeFileSync(Constant?.JK_USER, doc);
+      const doc = JSON.stringify({ ...this.config, [key]: value });
+      fs.writeFileSync(Constant?.JK_CONFIG, doc);
       this._config = doc;
       resolve(true);
     });
   }
 
   /**
+   * get
+   */
+  public get(key: string) {
+    return this.config[key];
+  }
+
+  /**
    * clear
    */
   public async clear() {
-    await this.save();
+    fs.writeFileSync(Constant?.JK_CONFIG, "{}");
+    this._config = "{}";
   }
 }
 

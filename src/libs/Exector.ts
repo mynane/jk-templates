@@ -8,7 +8,7 @@ import path from "path";
  * @param instance
  */
 export function rejesterProgram(instance: any, name: string) {
-  const { command, action, options, description, alias } = instance;
+  const { command, action, options, description, alias, ctx } = instance;
   if (!command || !action) {
     throw new Error(`module '${name}' not found ${chalk.blue("command")}  property or ${chalk.blue("action")} method`);
   }
@@ -26,7 +26,11 @@ export function rejesterProgram(instance: any, name: string) {
     }
   }
   if (action) {
-    com?.action(action);
+    com?.action(async () => {
+      await action();
+      // check version when action called
+      await ctx?.Version?.check();
+    });
   }
 
   return instance;

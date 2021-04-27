@@ -17,7 +17,6 @@ class User extends JKModule {
         throw new Error("user can not found");
       }
       console.log(chalk.green(`current login user is: ${chalk.blue(user.login)}`));
-      await this.ctx?.Version?.check();
     } catch (error) {
       console.log(chalk.red("user can not found!"));
       this.ctx?.Login?.confirm();

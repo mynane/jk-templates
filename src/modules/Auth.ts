@@ -12,7 +12,6 @@ import { Command, JKModule } from "../libs/Application";
 export class LoginCommand extends JKModule {
   public action = async () => {
     await this.ctx?.Login?.action();
-    await this.ctx?.Version?.check();
   };
 }
 
@@ -26,6 +25,5 @@ export class LoginCommand extends JKModule {
 export class LogoutCommand extends JKModule {
   public action = async () => {
     await this.ctx?.Login?.logout();
-    await this.ctx?.Version?.check();
   };
 }
