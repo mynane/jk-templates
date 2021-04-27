@@ -67,6 +67,25 @@ class Module extends JKUtil {
       });
     });
   }
+
+  /**
+   * install
+   */
+  public install(moduleName: string) {
+    return new Promise((resolve, reject) => {
+      exec(`cd ./${moduleName} && npm i`, (err, stdout, stderr) => {
+        if (err) {
+          reject(err);
+        }
+        if (stdout) {
+          resolve(stdout);
+        }
+        if (stderr) {
+          resolve(stderr);
+        }
+      });
+    });
+  }
 }
 
 export default Module;

@@ -24,9 +24,11 @@ class Use extends JKModule {
       console.log();
       this.ctx?.Loading?.start("module loading \n");
       await this.ctx?.Module?.DownLoad(result?.url, moduleName);
+      this.ctx?.Loading?.text("installing \n");
+      await this.ctx?.Module?.install(moduleName);
       this.ctx?.Loading?.spinner?.succeed("success");
     } catch (error) {
-      this.ctx?.Loading?.spinner?.fail("module loading fail!");
+      this.ctx?.Loading?.spinner?.fail("module loading or install fail!");
       console.log(chalk.red(error));
     }
   };
