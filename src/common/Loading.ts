@@ -1,6 +1,7 @@
 import ora from "ora";
+import { JKUtil } from "../libs/Application";
 
-class Loading {
+class Loading extends JKUtil {
   spinner: any;
   public start(message = "loading") {
     this.spinner = ora(message).start();

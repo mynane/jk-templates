@@ -33,6 +33,10 @@ class Application extends Exector {
   public globalProviders: Map<string, any> = new Map();
   public mudules: any = {};
 
+  constructor() {
+    super();
+  }
+
   /**
    * 命令注册
    * @param options

@@ -6,6 +6,7 @@ import Login from "../common/Login";
 import Module from "../common/Module";
 import Token from "../common/Token";
 import User from "../common/User";
+import Version from "../common/Version";
 
 export interface IBase {
   command?: string;
@@ -25,4 +26,5 @@ export interface IContext {
   User?: User;
   Token?: Token;
   Loading?: Loading;
+  Version?: Version;
 }
