@@ -1,4 +1,5 @@
 /* eslint-disable prefer-const */
+import chalk from "chalk";
 import { Command, JKModule } from "../libs/Application";
 
 @Command({
@@ -15,17 +16,35 @@ export class Lists extends JKModule {
   };
 }
 
+@Command({
+  command: "remove <ModuleID>",
+  description: "remove module by ModuleID",
+  alias: "rm",
+})
+export class Remove extends JKModule {
+  /**
+   * action
+   */
+  public action = async (moduleID: string) => {
+    if (!moduleID) {
+      return console.log(chalk.red("plase input you ModuleID"));
+    }
+
+    try {
+      await this.ctx?.Form?.confirm(`confirm to delete module`);
+      await this.ctx?.Module?.remove(moduleID);
+    } catch (error) {}
+  };
+}
+
 /**
  * 个人认证
  */
 @Command({
-  command: "group",
+  command: "module",
   description: "manage your modules",
-  alias: "g",
-  options: [
-    ["-n, --name <name>", "create module by name"],
-    ["-l, --lists", "show modlues lists"],
-  ],
+  alias: "m",
+  options: [["-n, --name <name>", "create module by name"]],
 })
 export class Module extends JKModule {
   public action = async (type: any) => {

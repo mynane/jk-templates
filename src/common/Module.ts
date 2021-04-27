@@ -21,6 +21,18 @@ class Module extends JKUtil {
   }
 
   /**
+   * remove
+   */
+  public async remove(id = "") {
+    try {
+      await this.ctx?.Api?.remove(id);
+      console.log(chalk.green("remove module success"));
+    } catch (error) {
+      console.log(chalk.red("remove module fail, please check your ModuleID"));
+    }
+  }
+
+  /**
    * lists
    */
   public async lists() {

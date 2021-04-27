@@ -21,6 +21,12 @@ class Api extends JKUtil {
     }
   }
 
+  /**
+   * get method
+   * @param url
+   * @param headers
+   * @returns
+   */
   public get(url: string, headers = {}): any {
     return axios({
       url: `${Constant?.PREFIX}${url}`,
@@ -32,7 +38,27 @@ class Api extends JKUtil {
   }
 
   /**
-   * post
+   * delete method
+   * @param url
+   * @param headers
+   * @returns
+   */
+  public delete(url: string, headers = {}): any {
+    return axios({
+      url: `${Constant?.PREFIX}${url}`,
+      method: "delete",
+      headers: { ...headers, "Content-Type": "application/json", Authorization: `Bearer ${this.token}` },
+    }).then(async (res: AxiosResponse<any>) => {
+      return this.handle(res, url, headers, "delete");
+    });
+  }
+
+  /**
+   * post method
+   * @param url
+   * @param headers
+   * @param data
+   * @returns
    */
   public post(url: string, headers = {}, data = {}) {
     return axios({
@@ -78,6 +104,13 @@ class Api extends JKUtil {
    */
   public async ids() {
     return await this.get("/recommends?pageSize=1000");
+  }
+
+  /**
+   * remove
+   */
+  public async remove(id: string) {
+    return await this.delete(`/group/${id}`);
   }
 }
 

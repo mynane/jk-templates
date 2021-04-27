@@ -7,8 +7,7 @@ import { Command, JKModule } from "../libs/Application";
  */
 @Command({
   command: "use <ModuleID>",
-  description: "",
-  alias: "",
+  description: "use one template module init your project",
 })
 class Use extends JKModule {
   public action = async (moduleID: any) => {

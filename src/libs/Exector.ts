@@ -26,8 +26,8 @@ export function rejesterProgram(instance: any, name: string) {
     }
   }
   if (action) {
-    com?.action(async () => {
-      await action();
+    com?.action(async (a: any, b: any) => {
+      await action(a, b);
       // check version when action called
       await ctx?.Version?.check();
     });
