@@ -56,7 +56,7 @@ class Api extends JKUtil {
    * saveGroup
    */
   public async saveGroup(values: any) {
-    return await this.post("/group", values);
+    return await this.post("/group", {}, values);
   }
 
   /**

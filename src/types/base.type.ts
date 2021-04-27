@@ -1,6 +1,7 @@
 import Api from "../common/Api";
 import Auth from "../common/Auth";
 import Form from "../common/Form";
+import Loading from "../common/Loading";
 import Login from "../common/Login";
 import Module from "../common/Module";
 import Token from "../common/Token";
@@ -23,4 +24,5 @@ export interface IContext {
   Auth?: Auth;
   User?: User;
   Token?: Token;
+  Loading?: Loading;
 }

@@ -1,6 +1,7 @@
 import chalk from "chalk";
 import { JKUtil } from "../libs/Application";
 import { checkUrl } from "../utils";
+import { exec } from "child_process";
 
 class Module extends JKUtil {
   /**
@@ -11,8 +12,9 @@ class Module extends JKUtil {
       const moduleName = name ?? (await this.ctx?.Form?.input({ message: "please input module`s name:" }));
       const url = await this.ctx?.Form?.input({ message: "please input module`s url:", check: checkUrl });
       const describe = await this.ctx?.Form?.input({ message: "please input module`s describe:" });
-      await this.ctx?.Api?.saveGroup({ name: moduleName, describe, url });
-      console.log(chalk.green(`create module ${moduleName} success`));
+      console.log(moduleName, url, describe);
+      const result = await this.ctx?.Api?.saveGroup({ name: moduleName, describe, url });
+      console.log(chalk.green(`create module ${moduleName} success ModuleID: ${result?._id}`));
     } catch (error) {
       console.log(error);
     }
@@ -45,6 +47,25 @@ class Module extends JKUtil {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  /**
+   * DownLoad
+   */
+  public DownLoad(url: string, moduleName = "") {
+    return new Promise((resolve, reject) => {
+      exec(`git clone ${url} ${moduleName}`, (err, stdout, stderr) => {
+        if (err) {
+          reject(err);
+        }
+        if (stdout) {
+          resolve(stdout);
+        }
+        if (stderr) {
+          resolve(stderr);
+        }
+      });
+    });
   }
 }
 
