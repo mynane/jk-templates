@@ -36,7 +36,9 @@ class Version extends JKUtil {
     if (useTimeInterval && now - lastestVersionCheck < Constant.checkVersionTimeInterval) {
       return;
     }
+    this.ctx?.Loading?.start("staring check version");
     const lastVersion = await latestVersion(pack.name);
+    this.ctx?.Loading?.spinner.stop();
     if (lastVersion && lastVersion !== pack.version) {
       console.log(chalk.green(`${pack.name} latest version is '${lastVersion}', current version is '${pack.version}'`));
       try {
@@ -46,7 +48,7 @@ class Version extends JKUtil {
         this.ctx?.Loading?.spinner?.succeed("success");
       } catch (error) {
         this.ctx?.Loading?.spinner?.fail("updating fail!");
-        console.log(chalk.red(error));
+        // console.log(chalk.red(error));
       }
     } else if (!useTimeInterval) {
       console.log(chalk.green(`Current version '${pack.version}' is the latest version`));
