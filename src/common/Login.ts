@@ -8,7 +8,7 @@ import open from "open";
 import Constant from "../config/constant";
 import { JKUtil } from "../libs/Application";
 
-const loginUrl = () => {
+const loginUrl = (): string => {
   const CLIENT_ID = "Iv1.f92a3890970ecc1e";
   const CLIENT_SECRET = "d6ae5fbd1189ea0577b2a1b01ba0d3b902e6f3cc";
   const url = `https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`;
@@ -16,6 +16,15 @@ const loginUrl = () => {
 };
 
 class Login extends JKUtil {
+  public timer?: any;
+  public setTimer() {
+    this.timer = setTimeout(() => {
+      console.log(chalk.white(`If it is not opened with the default browser, please copy the link to access`));
+      console.log();
+      console.log(chalk.blue(loginUrl()));
+      console.log();
+    }, 10000);
+  }
   public async confirm() {
     try {
       await this.ctx?.Form?.confirm("Are you sure you want to login again?");
@@ -40,6 +49,7 @@ class Login extends JKUtil {
         })
       );
       app.get("/oauth", async (req: any, res: any) => {
+        clearTimeout(this.timer);
         await this.ctx?.Token?.save(req.query?.token);
         try {
           const user = await this.ctx?.Api?.user();
@@ -60,6 +70,7 @@ class Login extends JKUtil {
       server = await app.listen(Constant.AUTH_PORT);
       console.log(chalk.green("wait for authorize by github account"));
       open(loginUrl());
+      this.setTimer();
     });
   }
 }
