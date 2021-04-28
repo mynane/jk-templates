@@ -17,10 +17,7 @@ class Use extends JKModule {
     const moduleName: any = await this.ctx?.Form?.input({ message: "input module name:" });
     try {
       const result = await this.ctx?.Api?.group(moduleID);
-      console.log(`ModuleID: ${chalk.yellow(result?._id)}`);
-      console.log(`Name: ${result?.name}`);
-      console.log(`URL: ${result?.url}`);
-      console.log();
+      this.ctx?.Module?.echo(result, false);
       this.ctx?.Loading?.start("module loading \n");
       await this.ctx?.Module?.DownLoad(result?.url, moduleName);
       this.ctx?.Loading?.text("installing \n");

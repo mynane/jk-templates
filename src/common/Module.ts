@@ -1,6 +1,7 @@
 import chalk from "chalk";
 import fs from "fs-extra";
 import path from "path";
+import moment from "moment";
 import { JKUtil } from "../libs/Application";
 import { checkUrl } from "../utils";
 import { exec } from "child_process";
@@ -89,14 +90,13 @@ class Module extends JKUtil {
   /**
    * echo
    */
-  public echo(data: any) {
-    console.log(`ModuleID: ${chalk.yellow(data?._id)}`);
+  public echo(data: any, showDetail = true) {
+    console.log(`ModuleID: ${chalk.yellow(data?._id)} ${chalk.green(`(${moment(data.create_at).fromNow()})`)}`);
     console.log(`Name: ${data?.name}`);
     console.log(`URL: ${data?.url}`);
-    console.log(`Date: ${data?.create_at}`);
     console.log();
-    console.log(`    ${chalk.green(data?.describe)}`);
-    console.log();
+    showDetail && console.log(`    ${chalk.green(data?.describe)}`);
+    showDetail && console.log();
   }
 
   /**
