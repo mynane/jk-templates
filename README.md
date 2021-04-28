@@ -66,9 +66,9 @@ npm i -g jk-templates
 
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2b2c60e29b344bfe821b68cf382136f7~tplv-k3u1fbpfcp-watermark.image)
 
-####账号管理
+#### 账号管理
 
-#####查看登录信息
+##### 查看登录信息
 
 ```
   jkt whoami
@@ -76,7 +76,7 @@ npm i -g jk-templates
 
 ![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/cb3a475e9bff4f16b734994bb38c3bfe~tplv-k3u1fbpfcp-watermark.image)
 
-#####github 登录
+##### github 登录
 
 ```
   jkt login
@@ -84,7 +84,7 @@ npm i -g jk-templates
 
 ![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b3d1718c2a9e4232baa6a41be87bb229~tplv-k3u1fbpfcp-watermark.image)
 
-#####退出登录
+##### 退出登录
 
 ```
   jkt logout
@@ -92,9 +92,9 @@ npm i -g jk-templates
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/34aeec63b61e4c5588d330d6a14aa590~tplv-k3u1fbpfcp-watermark.image)
 
-#####模块管理
+##### 模块管理
 
-#####查看现有模块
+##### 查看现有模块
 
 ```
   jkt lists
@@ -102,7 +102,7 @@ npm i -g jk-templates
 
 ![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8471428ec08b4c949944788d7a14b629~tplv-k3u1fbpfcp-watermark.image)
 
-#####新增模块
+##### 新增模块
 
 ```
   jkt module
@@ -110,21 +110,21 @@ npm i -g jk-templates
 
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0b3891db5af14f4896aaaa630f723033~tplv-k3u1fbpfcp-watermark.image)
 
-#####删除模块
+##### 删除模块
 
 ```
   jkt module <ModuleID>
 ```
 
-#####编辑模块
+##### 编辑模块
 
 ```
   jkt edit <ModuleID>
 ```
 
-####模块使用
+#### 模块使用
 
-#####clone 和安装
+##### clone 和安装
 
 ```
   jkt use <ModuleID>
@@ -142,9 +142,9 @@ npm i -g jk-templates
 
 ![image.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eb1d3f3106fc479f9f947f322b4d706d~tplv-k3u1fbpfcp-watermark.image)
 
-####jk-tempates 版本管理
+#### jk-tempates 版本管理
 
-#####版本检测与更新
+##### 版本检测与更新
 
 ```
   jkt check
@@ -153,3 +153,11 @@ npm i -g jk-templates
 最新版
 
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1ba3b33794ea4e55b4d8c71e42279ee8~tplv-k3u1fbpfcp-watermark.image)
+
+有更新
+
+![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/8cd1ca784e204c10b8fc23488dada563~tplv-k3u1fbpfcp-watermark.image)
+
+完成
+
+![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/524fd8b085de4ae2bd11b8ae62cba4c1~tplv-k3u1fbpfcp-watermark.image)
