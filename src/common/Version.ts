@@ -48,7 +48,6 @@ class Version extends JKUtil {
         this.ctx?.Loading?.spinner?.succeed("success");
       } catch (error) {
         this.ctx?.Loading?.spinner?.fail("updating fail!");
-        // console.log(chalk.red(error));
       }
     } else if (!useTimeInterval) {
       console.log(chalk.green(`Current version '${pack.version}' is the latest version`));

@@ -1,4 +1,6 @@
 import chalk from "chalk";
+import fs from "fs-extra";
+import path from "path";
 import { JKUtil } from "../libs/Application";
 import { checkUrl } from "../utils";
 import { exec } from "child_process";
@@ -114,17 +116,22 @@ class Module extends JKUtil {
    */
   public install(moduleName: string) {
     return new Promise((resolve, reject) => {
-      exec(`cd ./${moduleName} && npm i`, (err, stdout, stderr) => {
-        if (err) {
-          reject(err);
-        }
-        if (stdout) {
-          resolve(stdout);
-        }
-        if (stderr) {
-          resolve(stderr);
-        }
-      });
+      const exists = fs.existsSync(path.join(process.cwd(), `/${moduleName}/package.json`));
+      if (exists) {
+        exec(`cd ./${moduleName} && npm i`, (err, stdout, stderr) => {
+          if (err) {
+            reject(err);
+          }
+          if (stdout) {
+            resolve(stdout);
+          }
+          if (stderr) {
+            resolve(stderr);
+          }
+        });
+      } else {
+        resolve("");
+      }
     });
   }
 }
