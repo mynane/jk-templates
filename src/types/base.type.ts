@@ -8,6 +8,7 @@ import Module from "../common/Module";
 import Token from "../common/Token";
 import User from "../common/User";
 import Version from "../common/Version";
+import Website from "../common/Website";
 
 export interface IBase {
   command?: string;
@@ -29,4 +30,5 @@ export interface IContext {
   Loading?: Loading;
   Version?: Version;
   Config?: Config;
+  Website?: Website;
 }

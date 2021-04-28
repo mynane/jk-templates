@@ -5,7 +5,7 @@ import { Command, JKModule } from "../libs/Application";
 @Command({
   command: "lists",
   description: "modules lists",
-  alias: "l",
+  alias: "ls",
 })
 export class Lists extends JKModule {
   /**

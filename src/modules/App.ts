@@ -1,5 +1,4 @@
 /* eslint-disable prefer-const */
-// import { Command } from "../utils/Bootstrap";
 import { Command, JKModule } from "../libs/Application";
 
 /**
@@ -13,5 +12,17 @@ import { Command, JKModule } from "../libs/Application";
 export class CheckCommand extends JKModule {
   public action = async () => {
     await this.ctx?.Version?.check(false);
+  };
+}
+/**
+ *
+ */
+@Command({
+  command: "home",
+  description: "open homepage",
+})
+export class HomeCommand extends JKModule {
+  public action = async () => {
+    await this.ctx?.Website?.Home();
   };
 }

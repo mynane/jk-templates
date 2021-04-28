@@ -17,7 +17,6 @@ class Constant {
   static PREFIX = "https://www.jikequan.net/api";
   // 多久检测一次版本
   static checkVersionTimeInterval = 60 * 60 * 1000;
-  // static PREFIX = "http://localhost:3000/api";
   // auth port
   static AUTH_PORT = 65436;
 }
