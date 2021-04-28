@@ -79,17 +79,24 @@ class Module extends JKUtil {
         return;
       }
       for (const i of data) {
-        console.log(`ModuleID: ${chalk.green(i?._id)}`);
-        console.log(`Name: ${i?.name}`);
-        console.log(`URL: ${i?.url}`);
-        console.log(`Date: ${i?.create_at}`);
-        console.log();
-        console.log(`    ${i?.describe}`);
-        console.log();
+        this.echo(i);
       }
     } catch (error) {
       console.log(error);
     }
+  }
+
+  /**
+   * echo
+   */
+  public echo(data: any) {
+    console.log(`ModuleID: ${chalk.yellow(data?._id)}`);
+    console.log(`Name: ${data?.name}`);
+    console.log(`URL: ${data?.url}`);
+    console.log(`Date: ${data?.create_at}`);
+    console.log();
+    console.log(`    ${chalk.green(data?.describe)}`);
+    console.log();
   }
 
   /**
