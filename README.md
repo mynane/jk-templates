@@ -48,9 +48,9 @@ npm i -g jk-templates
 
 ### 详细说明
 
-####基础使用
+#### 基础使用
 
-#####查看帮助
+##### 查看帮助
 
 ```
   jkt -h
@@ -58,7 +58,7 @@ npm i -g jk-templates
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/72a89a8f55ec4907915afe62c1c105e5~tplv-k3u1fbpfcp-watermark.image)
 
-#####查看版本
+##### 查看版本
 
 ```
   jkt -V
