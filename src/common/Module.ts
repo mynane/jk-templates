@@ -12,9 +12,38 @@ class Module extends JKUtil {
       const moduleName = name ?? (await this.ctx?.Form?.input({ message: "please input module`s name:" }));
       const url = await this.ctx?.Form?.input({ message: "please input module`s url:", check: checkUrl });
       const describe = await this.ctx?.Form?.input({ message: "please input module`s describe:" });
-      console.log(moduleName, url, describe);
       const result = await this.ctx?.Api?.saveGroup({ name: moduleName, describe, url });
       console.log(chalk.green(`create module ${moduleName} success ModuleID: ${result?._id}`));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  /**
+   * edit
+   */
+  public async edit(id: string) {
+    try {
+      const module = await this.ctx?.Api?.getOneById(id);
+      if (!module) {
+        throw new Error("module not foound");
+      }
+
+      const moduleName = await this.ctx?.Form?.input({
+        message: "please input module`s name:",
+        defaultValue: module.name,
+      });
+      const url = await this.ctx?.Form?.input({
+        message: "please input module`s url:",
+        check: checkUrl,
+        defaultValue: module.url,
+      });
+      const describe = await this.ctx?.Form?.input({
+        message: "please input module`s describe:",
+        defaultValue: module.describe,
+      });
+      await this.ctx?.Api?.updateGroup(id, { name: moduleName, describe, url });
+      console.log(chalk.green(`update module ${module.name} success ModuleID: ${id}`));
     } catch (error) {
       console.log(error);
     }
@@ -41,7 +70,7 @@ class Module extends JKUtil {
       if (!data.length) {
         try {
           console.log(chalk.green("No data found"));
-          await this.ctx?.Form?.confirm("do you need to create a new one");
+          await this.ctx?.Form?.confirm("do you need to create");
           this.create();
         } catch (error) {}
 

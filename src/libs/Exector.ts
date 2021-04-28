@@ -44,7 +44,7 @@ class Exector {
   mudules: any;
 
   public loadModules() {
-    const _path = path.resolve(__dirname, "../modules");
+    const _path = path.resolve(__dirname, "../commands");
     const files = fs.readdirSync(_path);
     for (const f of files) {
       if (!f.endsWith(".d.ts")) {

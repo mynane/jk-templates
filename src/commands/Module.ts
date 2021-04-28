@@ -17,6 +17,20 @@ export class Lists extends JKModule {
 }
 
 @Command({
+  command: "edit <ModuleID>",
+  description: "edit module by ModuleID",
+  alias: "e",
+})
+export class Edit extends JKModule {
+  /**
+   * action
+   */
+  public action = async (moduleID: string) => {
+    await this.ctx?.Module?.edit(moduleID);
+  };
+}
+
+@Command({
   command: "remove <ModuleID>",
   description: "remove module by ModuleID",
   alias: "rm",

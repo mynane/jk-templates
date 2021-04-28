@@ -20,6 +20,8 @@ npm i -g jk-templates
 
   - [x] [查看版本](#查看版本)
 
+  - [x] [打开官网](#打开官网)
+
 - [x] [账号管理](#账号管理)
 
   - [x] [查看登录信息](#查看登录信息)
@@ -28,7 +30,7 @@ npm i -g jk-templates
 
   - [x] [退出登录](#退出登录)
 
-- [ ] [模块管理](#模块管理)
+- [x] [模块管理](#模块管理)
 
   - [x] [查看现有模块](#查看现有模块)
 
@@ -36,7 +38,7 @@ npm i -g jk-templates
 
   - [x] [删除模块](#删除模块)
 
-  - [ ] [编辑模块](#编辑模块)
+  - [x] [编辑模块](#编辑模块)
 
 - [x] [模块使用](#模块使用)
 
@@ -65,6 +67,12 @@ npm i -g jk-templates
 ```
 
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2b2c60e29b344bfe821b68cf382136f7~tplv-k3u1fbpfcp-watermark.image)
+
+##### 打开官网
+
+```
+  jkt home
+```
 
 #### 账号管理
 

@@ -72,6 +72,24 @@ class Api extends JKUtil {
   }
 
   /**
+   * put method
+   * @param url
+   * @param headers
+   * @param data
+   * @returns
+   */
+  public put(url: string, headers = {}, data = {}) {
+    return axios({
+      method: "put",
+      data,
+      url: `${Constant?.PREFIX}${url}`,
+      headers: { ...headers, "Content-Type": "application/json", Authorization: `Bearer ${this.token}` },
+    }).then(async (res: AxiosResponse<any>) => {
+      return this.handle(res, url, headers, "put", data);
+    });
+  }
+
+  /**
    * user
    */
   public async user() {
@@ -83,6 +101,13 @@ class Api extends JKUtil {
    */
   public async saveGroup(values: any) {
     return await this.post("/group", {}, values);
+  }
+
+  /**
+   * saveGroup
+   */
+  public async updateGroup(id: string, values: any) {
+    return await this.put(`/group/${id}`, {}, values);
   }
 
   /**
@@ -111,6 +136,13 @@ class Api extends JKUtil {
    */
   public async remove(id: string) {
     return await this.delete(`/group/${id}`);
+  }
+
+  /**
+   * remove
+   */
+  public async getOneById(id: string) {
+    return await this.get(`/group/${id}`);
   }
 }
 
