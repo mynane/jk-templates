@@ -14,17 +14,32 @@ class Use extends JKModule {
     if (!moduleID) {
       return console.log(chalk.red("plase input you ModuleID"));
     }
-    const moduleName: any = await this.ctx?.Form?.input({ message: "input module name:" });
     try {
       const result = await this.ctx?.Api?.group(moduleID);
       this.ctx?.Module?.echo(result, false);
-      this.ctx?.Loading?.start("module loading \n");
-      await this.ctx?.Module?.DownLoad(result?.url, moduleName);
-      this.ctx?.Loading?.text("installing \n");
-      await this.ctx?.Module?.install(moduleName);
-      this.ctx?.Loading?.spinner?.succeed("success");
+      if (result.type === "git") {
+        const moduleName: any = await this.ctx?.Form?.input({ message: "input module name:" });
+        this.ctx?.Loading?.start("module loading \n");
+        await this.ctx?.Module?.DownLoad(result?.url, moduleName);
+        this.ctx?.Loading?.text("installing \n");
+        await this.ctx?.Module?.install(moduleName);
+        this.ctx?.Loading?.spinner?.succeed("success");
+      } else {
+        const place: any = await this.ctx?.Form?.list({
+          choices: ["Gloabl", "local", "local-dev"],
+          message: "Please select the installation location",
+        });
+        const tool: any = await this.ctx?.Form?.list({
+          choices: ["npm", "yarn"],
+          defaultValue: "npm",
+          message: "Please select the installation tool",
+        });
+        this.ctx?.Loading?.start("npm package installing \n");
+        await this.ctx?.Module?.installPackge(result?.url, place, tool);
+        this.ctx?.Loading?.spinner?.succeed("success");
+      }
     } catch (error) {
-      this.ctx?.Loading?.spinner?.fail("module loading or install fail!");
+      this.ctx?.Loading?.spinner?.fail("failed!");
       console.log(chalk.red(error));
     }
   };

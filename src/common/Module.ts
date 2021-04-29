@@ -3,8 +3,26 @@ import fs from "fs-extra";
 import path from "path";
 import moment from "moment";
 import { JKUtil } from "../libs/Application";
-import { checkUrl } from "../utils";
+import { checkGitUrl, checkNpmUrl } from "../utils";
 import { exec } from "child_process";
+
+const types: { [key: string]: string } = {
+  git: "git repositories",
+  npm: "npm package",
+};
+
+const moduleConfig: any = {
+  "git repositories": {
+    name: "git",
+    check: checkGitUrl,
+    placehoder: "please input module`s url(.git):",
+  },
+  "npm package": {
+    name: "npm",
+    check: checkNpmUrl,
+    placehoder: "please input module`s name:",
+  },
+};
 
 class Module extends JKUtil {
   /**
@@ -13,9 +31,17 @@ class Module extends JKUtil {
   public async create(name?: string) {
     try {
       const moduleName = name ?? (await this.ctx?.Form?.input({ message: "please input module`s name:" }));
-      const url = await this.ctx?.Form?.input({ message: "please input module`s url:", check: checkUrl });
-      const describe = await this.ctx?.Form?.input({ message: "please input module`s describe:" });
-      const result = await this.ctx?.Api?.saveGroup({ name: moduleName, describe, url });
+      const type: any = await this.ctx?.Form?.list({
+        choices: Object.keys(moduleConfig),
+        message: "please input module`s type:",
+      });
+      const config = moduleConfig[type];
+      const url = await this.ctx?.Form?.input({
+        message: config.placehoder,
+        check: config.check,
+      });
+      const describe = await this.ctx?.Form?.edit({ message: "please input module`s describe:" });
+      const result = await this.ctx?.Api?.saveGroup({ name: moduleName, describe, url, type: config.name });
       console.log(chalk.green(`create module ${moduleName} success ModuleID: ${result?._id}`));
     } catch (error) {
       console.log(error);
@@ -29,19 +55,21 @@ class Module extends JKUtil {
     try {
       const module = await this.ctx?.Api?.getOneById(id);
       if (!module) {
-        throw new Error("module not foound");
+        throw new Error("module not found");
       }
+
+      const config = moduleConfig[types[module.type]];
 
       const moduleName = await this.ctx?.Form?.input({
         message: "please input module`s name:",
         defaultValue: module.name,
       });
       const url = await this.ctx?.Form?.input({
-        message: "please input module`s url:",
-        check: checkUrl,
+        message: config.placehoder,
+        check: config.check,
         defaultValue: module.url,
       });
-      const describe = await this.ctx?.Form?.input({
+      const describe = await this.ctx?.Form?.edit({
         message: "please input module`s describe:",
         defaultValue: module.describe,
       });
@@ -93,7 +121,7 @@ class Module extends JKUtil {
   public echo(data: any, showDetail = true) {
     console.log(`ModuleID: ${chalk.yellow(data?._id)} ${chalk.green(`(${moment(data.create_at).fromNow()})`)}`);
     console.log(`Name: ${data?.name}`);
-    console.log(`URL: ${data?.url}`);
+    console.log(`${data.type}: ${data.type === "git" ? chalk.blue(data?.url) : data?.url}`);
     console.log();
     showDetail && console.log(`    ${chalk.green(data?.describe)}`);
     showDetail && console.log();
@@ -139,6 +167,26 @@ class Module extends JKUtil {
       } else {
         resolve("");
       }
+    });
+  }
+
+  /**
+   * installPackge
+   */
+  public installPackge(name: string, place: string, tool = "npm") {
+    const params: any = { Global: "-g", local: "", "local-dev": "-D", npm: "npm i", yarn: "yarn add" };
+    return new Promise((resolve, reject) => {
+      exec(`${params[tool]} ${name} ${params[place]}`, (err, stdout, stderr) => {
+        if (err) {
+          reject(err);
+        }
+        if (stdout) {
+          resolve(stdout);
+        }
+        if (stderr) {
+          resolve(stderr);
+        }
+      });
     });
   }
 }

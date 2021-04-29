@@ -69,6 +69,54 @@ class Form extends JKUtil {
         });
     });
   }
+
+  /**
+   * list
+   */
+  public list(props: any) {
+    const { choices = [], message = "please choose:", defaultValue } = props;
+    return new Promise((resolve, reject) => {
+      inquirer
+        .prompt([
+          {
+            choices,
+            message,
+            type: "list",
+            default: defaultValue,
+            name: "input",
+          },
+        ])
+        .then(async (res: any) => {
+          resolve(res.input);
+        })
+        .catch((error: any) => {
+          reject(error);
+        });
+    });
+  }
+
+  /**
+   * edit
+   */
+  public edit({ message = "please input:", defaultValue = "" }) {
+    return new Promise((resolve, reject) => {
+      inquirer
+        .prompt([
+          {
+            message,
+            default: defaultValue,
+            type: "editor",
+            name: "input",
+          },
+        ])
+        .then(async (res: any) => {
+          resolve(res.input);
+        })
+        .catch((error: any) => {
+          reject(error);
+        });
+    });
+  }
 }
 
 export default Form;

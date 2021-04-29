@@ -16,6 +16,7 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": "off",
     "no-empty": "off",
     "no-empty-function": "off",
+    "no-async-promise-executor": "off",
   },
   ignorePatterns: ["dist"],
 };
